@@ -13,7 +13,6 @@ using namespace std;
 #ifndef BOARD_HH
 #define BOARD_HH
 
-// stores the results of a guess
 struct guessResult {
     int color_right, full_right;
 };
@@ -33,15 +32,12 @@ struct colorKey {
 class Board
 {
 public:
-    // constructor
     Board(char gentype);
 
-    // functions
     void print_gamestate();
     guessResult guess(const string& input);
 
 private:
-    // variables
     colorKey correct_key_;
     vector<char> usable_colors_ = {'B','R','Y','G','O','V'};
     vector<guessType> guesses_;

@@ -6,7 +6,7 @@
 */
 
 #include "board.hh"
-#include "is_input_clear.hh"
+#include "helpFuncs.hh"
 
 #include <iostream>
 #include <vector>
@@ -29,7 +29,6 @@ Board::Board(char gentype)
     // randomly generate correct key
     if (gentype == 'R') {
 
-        // helper vars
         string fullkey = "";
         int seed;
 
@@ -40,12 +39,10 @@ Board::Board(char gentype)
         default_random_engine gen(seed);
         uniform_int_distribution<int> distr(0,5);
 
-        // loop to fetch four colors
         for (int i=0;i<4;i++) {
             // pick a random color
             char slc = usable_colors_.at(distr(gen));
 
-            // add it to the correct key
             correct_key_.colors.push_back(slc);
             fullkey += slc;
         }
@@ -53,7 +50,6 @@ Board::Board(char gentype)
         correct_key_.fullkey = fullkey;
 
     } else {
-        // generate correct key based on user input
         bool key_flag = true;
         string inp;
 
@@ -64,16 +60,12 @@ Board::Board(char gentype)
             // set input to all uppercase
             transform(inp.begin(), inp.end(), inp.begin(), ::toupper);
 
-            // check that input is clear
-            // if it is we can exit
             if (is_input_clear(inp)) {
                 key_flag=false;
             }
         }
 
-        // loop through given input string
         for (unsigned long int i=0;i<inp.length();i++) {
-            // add colors to key
             correct_key_.colors.push_back(inp.at(i));
         }
 
@@ -96,15 +88,11 @@ void Board::print_gamestate()
     */
     cout << "===================" << endl;
 
-    // go through all guesses
     for (unsigned long int i=0;i<guesses_.size();i++) {
-
-        // store the guess in it's own type
         guessType cur_gues = guesses_.at(i);
 
         cout << "|";
 
-        // go through each letter in guess
         for (auto letter : cur_gues.key) {
             cout << " " << letter;
         }
@@ -113,14 +101,12 @@ void Board::print_gamestate()
         cout << " " << cur_gues.score.full_right << " " << "|";
         cout << " " << cur_gues.score.color_right << " " << "|";
         cout << endl;
-
     }
     cout << "===================" << endl;
 }
 
 guessResult Board::guess(const string &input)
 {
-    // init the result and set values to 0
     guessResult result;
     result.full_right = 0;
     result.color_right = 0;
@@ -134,7 +120,6 @@ guessResult Board::guess(const string &input)
     // loop through the input string
     // we first only handle full matches
     for (unsigned long int i=0;i<input.length();i++) {
-        // get color by index
         char color = input.at(i);
 
         // see if given color in the correct key
@@ -143,12 +128,10 @@ guessResult Board::guess(const string &input)
                     check_key.colors.end(),
                     color);
 
-        // if the key contains color
         if (match_iterator != check_key.colors.end()) {
             // check what index the color matched
             unsigned long int match_index = match_iterator - check_key.colors.begin();
 
-            // check if index is correct
             if (i == match_index) {
                 result.full_right += 1;
             } else {
@@ -166,7 +149,6 @@ guessResult Board::guess(const string &input)
 
     // now we handle the parts that did not have a full match
     for (unsigned long int i=0;i<unhandled.length();++i) {
-        // get unhandled color
         char letter = unhandled.at(i);
 
         // see if we find color in input
@@ -191,6 +173,5 @@ guessResult Board::guess(const string &input)
     guess.key = input;
     guesses_.push_back(guess);
 
-    // return result of the guess
     return result;
 }
