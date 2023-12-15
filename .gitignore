@@ -1,0 +1,8 @@
+*.pro.user
+build-*/
+templates/
+examples/
+student/*/*/test.exe
+.DS_STORE
+.qtc_*/
+
