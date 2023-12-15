@@ -102,8 +102,8 @@ char get_gentype() {
     return gentype;
 }
 
-string INFO_TEXT= "Colors in use: B = Blue, R = Red, Y = Yellow, G = Green, O = Orange, V = Violet";
-string SEP_TEXT="*******************************************************************************";
+const string INFO_TEXT= "Colors in use: B = Blue, R = Red, Y = Yellow, G = Green, O = Orange, V = Violet";
+const string SEP_TEXT="*******************************************************************************";
 
 int main()
 {
