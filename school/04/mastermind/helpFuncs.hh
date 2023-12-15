@@ -5,11 +5,10 @@
  * email: samu.kaarlela@tuni.fi
 */
 
+#ifndef HELPFUNCS_H
+#define HELPFUNCS_H
 #include <string>
 
-#ifndef IS_INPUT_CLEAR_H
-#define IS_INPUT_CLEAR_H
-
+char get_gentype();
 bool is_input_clear(std::string inp);
-
-#endif // IS_INPUT_CLEAR_H
+#endif // HELPFUNCS_H

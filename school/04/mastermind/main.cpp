@@ -48,7 +48,7 @@
  */
 
 #include "board.hh"
-#include "is_input_clear.hh"
+#include "helpFuncs.hh"
 
 #include <iostream>
 #include <string>
@@ -56,51 +56,6 @@
 #include <algorithm>
 
 using namespace std;
-
-char get_gentype() {
-    /*
-     * Asks the user to input R or L
-     * Makes sure that input is
-     *     - only one letter
-     *     - R or L
-     *
-     * return the input
-    */
-
-    bool gen_flag = true;
-    string gentype_inp;
-    char gentype;
-
-    // loop until we have a clean input
-    while (gen_flag) {
-        cout << "Enter an input way (R = random, L = list): ";
-        cin >> gentype_inp;
-
-        if (gentype_inp.length()!=1) {
-            cout << "Bad input" << endl;
-            cin.clear();
-            continue;
-        } else {
-            // we need this to turn gentype into char
-            gentype = gentype_inp.at(0);
-        }
-
-        gentype = toupper(gentype);
-
-        // check input is clear
-        if ((gentype != 'R') && (gentype != 'L')) {
-            cout << "Bad input" << endl;
-            cin.clear();
-            continue;
-        }
-
-        // if program runs to this points
-        // then input is clear
-        gen_flag = false;
-    }
-
-    return gentype;
-}
 
 const string INFO_TEXT= "Colors in use: B = Blue, R = Red, Y = Yellow, G = Green, O = Orange, V = Violet";
 const string SEP_TEXT="*******************************************************************************";
