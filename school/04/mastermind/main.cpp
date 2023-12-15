@@ -47,15 +47,12 @@
  *        This way find will find the next unhandled value
  */
 
-
-// imports
 #include "board.hh"
 #include "is_input_clear.hh"
 
 #include <iostream>
 #include <string>
 #include <cctype>
-#include <vector>
 #include <algorithm>
 
 using namespace std;
@@ -70,18 +67,15 @@ char get_gentype() {
      * return the input
     */
 
-    // vars
     bool gen_flag = true;
     string gentype_inp;
     char gentype;
 
     // loop until we have a clean input
     while (gen_flag) {
-        // determine board gen method
         cout << "Enter an input way (R = random, L = list): ";
         cin >> gentype_inp;
 
-        // make sure only one char is given
         if (gentype_inp.length()!=1) {
             cout << "Bad input" << endl;
             cin.clear();
@@ -91,7 +85,6 @@ char get_gentype() {
             gentype = gentype_inp.at(0);
         }
 
-        // set input to uppercase
         gentype = toupper(gentype);
 
         // check input is clear
@@ -109,24 +102,21 @@ char get_gentype() {
     return gentype;
 }
 
+string INFO_TEXT= "Colors in use: B = Blue, R = Red, Y = Yellow, G = Green, O = Orange, V = Violet";
+string SEP_TEXT="*******************************************************************************";
 
 int main()
 {
     // flags used to track loops
     bool game_flag = true;
 
-    // helper variables
     string inp;
     char gentype;
 
-    // track the amount of guesses
     int guess_amount=0;
 
-    // info print
-    cout << "Colors in use: B = Blue, R = Red, Y = Yellow, G = Green, O = Orange, V = Violet" << endl;
-    cout << "*******************************************************************************" << endl;
+    cout << INFO_TEXT << endl << SEP_TEXT << endl;
 
-    // ask user for gentype
     gentype = get_gentype();
 
     // generate the board
@@ -141,13 +131,11 @@ int main()
         // set input to all uppercase
         transform(inp.begin(), inp.end(), inp.begin(), ::toupper);
 
-        // quit if q is given
         if (inp=="Q") {
             game_flag = false;
             continue;
         }
 
-        // check that input is proper
         if (!is_input_clear(inp)) {
             // skip back to beginning to ask new input
             continue;
@@ -158,17 +146,14 @@ int main()
         guessResult result = board.guess(inp);
         board.print_gamestate();
 
-        // four fully correct guesses means the code was correct
         if (result.full_right == 4) {
             cout << "You won: Congratulations!" << endl;
             game_flag = false;
             continue;
         } else {
-            // add attempt
             ++guess_amount;
         }
 
-        // if not guessed in 10, then player loses
         if (guess_amount==10) {
             game_flag = false;
             cout << "You lost: Maximum number of guesses done" << endl;
