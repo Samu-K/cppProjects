@@ -55,22 +55,20 @@
 #include <cctype>
 #include <algorithm>
 
-using namespace std;
-
-const string INFO_TEXT= "Colors in use: B = Blue, R = Red, Y = Yellow, G = Green, O = Orange, V = Violet";
-const string SEP_TEXT="*******************************************************************************";
+const std::string INFO_TEXT= "Colors in use: B = Blue, R = Red, Y = Yellow, G = Green, O = Orange, V = Violet";
+const std::string SEP_TEXT="*******************************************************************************";
 
 int main()
 {
     // flags used to track loops
     bool game_flag = true;
 
-    string inp;
+    std::string inp;
     char gentype;
 
     int guess_amount=0;
 
-    cout << INFO_TEXT << endl << SEP_TEXT << endl;
+    std::cout << INFO_TEXT << std::endl << SEP_TEXT << endl;
 
     gentype = get_gentype();
 
@@ -80,7 +78,7 @@ int main()
     // loop until q is pressed
     // or game ends
     while (game_flag) {
-        cout << "ROW> ";
+        std::cout << "ROW> ";
         cin >> inp;
 
         // set input to all uppercase
@@ -102,7 +100,7 @@ int main()
         board.print_gamestate();
 
         if (result.full_right == 4) {
-            cout << "You won: Congratulations!" << endl;
+            std::cout << "You won: Congratulations!" << std::endl;
             game_flag = false;
             continue;
         } else {
@@ -111,7 +109,7 @@ int main()
 
         if (guess_amount==10) {
             game_flag = false;
-            cout << "You lost: Maximum number of guesses done" << endl;
+            std::cout << "You lost: Maximum number of guesses done" << std::endl;
         }
     }
 }
