@@ -8,8 +8,6 @@
 #include <string>
 #include <vector>
 
-using namespace std;
-
 #ifndef BOARD_HH
 #define BOARD_HH
 
@@ -20,13 +18,13 @@ struct guessResult {
 // stores a singular guess
 struct guessType {
     guessResult score;
-    string key;
+    std::string key;
 };
 
 // stores the correct colorkey
 struct colorKey {
-    vector<char> colors;
-    string fullkey;
+    std::vector<char> colors;
+    std::string fullkey;
 };
 
 class Board
@@ -35,12 +33,12 @@ public:
     Board(char gentype);
 
     void print_gamestate();
-    guessResult guess(const string& input);
+    guessResult guess(const std::string& input);
 
 private:
     colorKey correct_key_;
-    vector<char> usable_colors_ = {'B','R','Y','G','O','V'};
-    vector<guessType> guesses_;
+    std::vector<char> usable_colors_ = {'B','R','Y','G','O','V'};
+    std::vector<guessType> guesses_;
 
 };
 

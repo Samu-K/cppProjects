@@ -14,8 +14,6 @@
 #include <random>
 #include <algorithm>
 
-using namespace std;
-
 Board::Board(char gentype)
 /*
  Generates correct colorkey when called
@@ -29,15 +27,15 @@ Board::Board(char gentype)
     // randomly generate correct key
     if (gentype == 'R') {
 
-        string fullkey = "";
+        std::string fullkey = "";
         int seed;
 
-        cout << "Enter a seed value: ";
-        cin >> seed;
+        std::cout << "Enter a seed value: ";
+        std::cin >> seed;
 
         // setup random number engine
-        default_random_engine gen(seed);
-        uniform_int_distribution<int> distr(0,5);
+        std::default_random_engine gen(seed);
+        std::uniform_int_distribution<int> distr(0,5);
 
         for (int i=0;i<4;i++) {
             // pick a random color
@@ -51,12 +49,12 @@ Board::Board(char gentype)
 
     } else {
         bool key_flag = true;
-        string inp;
+        std::string inp;
 
         // loop until user gives good answer
         while (key_flag) {
-            cout << "Enter four colors (four letters without spaces): ";
-            cin >> inp;
+            std::cout << "Enter four colors (four letters without spaces): ";
+            std::cin >> inp;
             // set input to all uppercase
             transform(inp.begin(), inp.end(), inp.begin(), ::toupper);
 
@@ -86,26 +84,26 @@ void Board::print_gamestate()
 
       Returns void
     */
-    cout << "===================" << endl;
+    std::cout << "===================" << std::endl;
 
     for (unsigned long int i=0;i<guesses_.size();i++) {
         guessType cur_gues = guesses_.at(i);
 
-        cout << "|";
+        std::cout << "|";
 
         for (auto letter : cur_gues.key) {
-            cout << " " << letter;
+            std::cout << " " << letter;
         }
 
-        cout << " " << "|";
-        cout << " " << cur_gues.score.full_right << " " << "|";
-        cout << " " << cur_gues.score.color_right << " " << "|";
-        cout << endl;
+        std::cout << " " << "|";
+        std::cout << " " << cur_gues.score.full_right << " " << "|";
+        std::cout << " " << cur_gues.score.color_right << " " << "|";
+        std::cout << std::endl;
     }
-    cout << "===================" << endl;
+    std::cout << "===================" << std::endl;
 }
 
-guessResult Board::guess(const string &input)
+guessResult Board::guess(const std::string &input)
 {
     guessResult result;
     result.full_right = 0;
@@ -114,10 +112,10 @@ guessResult Board::guess(const string &input)
     // create a copy of the key so we can modify it
     // without affecting the original
     auto check_key = correct_key_;
-    string check_inp = input;
-    string unhandled = "";
+    std::string check_inp = input;
+    std::string unhandled = "";
 
-    // loop through the input string
+    // loop through the input std::string
     // we first only handle full matches
     for (unsigned long int i=0;i<input.length();i++) {
         char color = input.at(i);
