@@ -5,4 +5,4 @@ examples/
 student/*/*/test.exe
 .DS_STORE
 .qtc_*/
-
+*.out

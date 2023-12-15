@@ -68,7 +68,7 @@ int main()
 
     int guess_amount=0;
 
-    std::cout << INFO_TEXT << std::endl << SEP_TEXT << endl;
+    std::cout << INFO_TEXT << std::endl << SEP_TEXT << std::endl;
 
     gentype = get_gentype();
 
@@ -79,7 +79,7 @@ int main()
     // or game ends
     while (game_flag) {
         std::cout << "ROW> ";
-        cin >> inp;
+        std::cin >> inp;
 
         // set input to all uppercase
         transform(inp.begin(), inp.end(), inp.begin(), ::toupper);
