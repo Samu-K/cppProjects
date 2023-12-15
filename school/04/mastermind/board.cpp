@@ -14,6 +14,8 @@
 #include <random>
 #include <algorithm>
 
+const std::string BREAK_STRING="===================";
+
 Board::Board(char gentype)
 /*
  Generates correct colorkey when called
@@ -84,7 +86,7 @@ void Board::print_gamestate()
 
       Returns void
     */
-    std::cout << "===================" << std::endl;
+    std::cout <<  BREAK_STRING << std::endl;
 
     for (unsigned long int i=0;i<guesses_.size();i++) {
         guessType cur_gues = guesses_.at(i);
@@ -95,12 +97,10 @@ void Board::print_gamestate()
             std::cout << " " << letter;
         }
 
-        std::cout << " " << "|";
-        std::cout << " " << cur_gues.score.full_right << " " << "|";
-        std::cout << " " << cur_gues.score.color_right << " " << "|";
-        std::cout << std::endl;
+        std::cout << " | " << cur_gues.score.full_right << " | ";
+        std::cout << cur_gues.score.color_right << " |" << std::endl;
     }
-    std::cout << "===================" << std::endl;
+    std::cout << BREAK_STRING << std::endl;
 }
 
 guessResult Board::guess(const std::string &input)
